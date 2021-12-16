@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne } from "typeorm";
 import { Album } from "./album.entity";
 import { Lyric } from "./lyric.entity";
 
@@ -10,7 +10,8 @@ export class Song  {
     @Column({nullable: false, unique: true})
     name: string;
 
-    @OneToMany(_ => Album, album => album.songs)
+    @ManyToOne(_ => Album, album => album.songs)
+    @JoinColumn({name: 'album_id'})
     albums: Array<Album>;
 
     @OneToOne(_ => Lyric, lyric => lyric.song, { eager: true, cascade: true })

@@ -10,6 +10,9 @@ export class Album  {
     @Column({nullable: false, unique: true})
     title: string;
 
+    @Column({type: 'timestamptz', nullable: true})
+    release_date: Date;
+
     @ManyToMany(_ => Artist, artist => artist.albums)
     artists: Array<Artist>;
 

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { Song } from "./song.entity";
 
 @Entity("lyrics")
@@ -10,6 +10,7 @@ export class Lyric  {
     content: string;
 
     @OneToOne(_ => Song, song => song.lyrics)
+    @JoinColumn({name: 'song_id'})
     song: Song; 
 }
 
