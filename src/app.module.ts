@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmConfigService } from './type-orm-config.service';
 import { Artist } from './entity/artist.entity';
 import { ArtistService } from './artist/artist.service';
 import { AlbumService } from './album/album.service';
@@ -10,13 +9,14 @@ import { ArtistController } from './artist/artist.controller';
 import { AlbumController } from './album/album.controller';
 import { SongController } from './song/song.controller';
 import { LyricController } from './lyric/lyric.controller';
-import { ConfigService } from './config/config.service';
+import { Lyric } from './entity/lyric.entity';
+import { Song } from './entity/song.entity';
+import { Album } from './entity/album.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({
-      useClass: TypeOrmConfigService
-    }),
+    TypeOrmModule.forRoot(),
+    TypeOrmModule.forFeature([Artist, Album, Song, Lyric])
   ],
   controllers: [
     ArtistController,
@@ -25,12 +25,10 @@ import { ConfigService } from './config/config.service';
     LyricController
   ],
   providers: [
-    TypeOrmConfigService,
     ArtistService,
     AlbumService,
     SongService,
     LyricService,
-    ConfigService
   ],
 })
 export class AppModule {}
