@@ -20,5 +20,5 @@ export class Album  {
     songs: Array<Song>
 }
 
-export type AlbumDto = Omit<Partial<Album>, 'id'>;
+export type AlbumUpdateDto = Omit<Partial<Album>, 'id'>;
 export type AlbumInsertDto = Pick<Album, 'title' | 'artists' | 'songs'>;

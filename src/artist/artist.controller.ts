@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { Artist, ArtistInsertDto, ArtistUpdateDto } from 'src/modules/artist.entity';
 import { ArtistService } from './artist.service';
 
@@ -30,13 +30,12 @@ export class ArtistController {
     }
 
     @Put(':id')
-    async Update(@Param('id') id: number, @Body() artist: ArtistUpdateDto): Promise<Artist> {
+    async Update(@Param('id') id: number, @Body() artist: ArtistUpdateDto) {
       return this.artistService.updateArtist(id, artist);
     }
   
-    /*
     @Delete(':id')
-    async Delete(@Param('id') id: string): Promise<ArtistModel> {
-      return this.artistService.deleteArtist({ id: Number(id)});
-    } */
+    async Delete(@Param('id') id: number) {
+      return this.artistService.deleteArtist(id);
+    } 
 }
