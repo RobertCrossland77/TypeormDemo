@@ -1,5 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { Artist, ArtistInsertDto } from 'src/modules/artist.entity';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Artist, ArtistInsertDto, ArtistUpdateDto } from 'src/modules/artist.entity';
 import { ArtistService } from './artist.service';
 
 @Controller('artist')
@@ -9,36 +9,32 @@ export class ArtistController {
     @Post()
     async CreateArtist(
       @Body() artist: ArtistInsertDto
-    ): Promise<Artist> {
-        console.log(`artist: ${JSON.stringify(artist)}`)
+    ): Promise<ArtistInsertDto & Artist> {
       return this.artistService.createArtist(artist);
-    }
-  /*
-    @Get()
-    async GetAll(@Query('skip') skip?: string, @Query('take') take?: string, @Query('name') nameSearch?: string): Promise<Array<ArtistModel>> {
-      return this.artistService.artists({
-        skip: skip && skip.length > 0 ? Number(skip) : undefined,
-        take: take && take.length > 0 ? Number(take) : undefined,
-        where: {
-          name: { contains: nameSearch }
-        }
-      });
     }
   
     @Get(':id')
-    async GetById(@Param('id') id: string): Promise<ArtistModel> {
-      return this.artistService.artist({ id: Number(id) });
+    async GetById(@Param('id') id: number): Promise<Artist> {
+      return this.artistService.artist(id);
     }
-  
+
+
+    @Get()
+    read(
+        @Query('ids') ids?: Array<string>,
+        @Query('skip') skip?: number,
+        @Query('take') take?: number,
+        @Query('search') search?: string,
+    ) {
+      return this.artistService.artists(ids, skip, take, search);
+    }
+
     @Put(':id')
-    async Update(@Param('id') id: string, @Body() artist: Omit<Partial<ArtistModel>, 'id'>): Promise<ArtistModel> {
-      console.log(`artist: ${artist}`)
-      return this.artistService.updateArtist({
-        where: { id: Number(id) },
-        data: artist
-      });
+    async Update(@Param('id') id: number, @Body() artist: ArtistUpdateDto): Promise<Artist> {
+      return this.artistService.updateArtist(id, artist);
     }
   
+    /*
     @Delete(':id')
     async Delete(@Param('id') id: string): Promise<ArtistModel> {
       return this.artistService.deleteArtist({ id: Number(id)});

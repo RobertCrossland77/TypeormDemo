@@ -12,6 +12,7 @@ import { LyricController } from './lyric/lyric.controller';
 import { Lyric } from './modules/lyric.entity';
 import { Song } from './modules/song.entity';
 import { Album } from './modules/album.entity';
+import { SearchBuilderService } from './search-builder-service/search-builder-service.service';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { Album } from './modules/album.entity';
     AlbumService,
     SongService,
     LyricService,
+    SearchBuilderService,
   ],
 })
 export class AppModule {}
