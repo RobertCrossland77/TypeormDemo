@@ -20,11 +20,11 @@ export class ArtistService {
 
   artists = async(ids?: Array<string>, skip?: number, take?: number, search?: string): Promise<Array<Artist>> => {
     const searchOptions = this.searchBuilderService.build({
-        order: { id: 'ASC' },
-        skip: skip,
-        take: take,
-        ids: ids,
-        search: search ? { search_types: ['name'], search_string: search } : undefined
+      order: { id: 'ASC' },
+      skip: skip,
+      take: take,
+      ids: ids,
+      search: search ? { search_types: ['name'], search_string: search } : undefined
     }, 'id');
 
     return await this.artistRepository.find(searchOptions);

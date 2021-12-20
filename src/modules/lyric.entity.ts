@@ -3,15 +3,15 @@ import { Song } from "./song.entity";
 
 @Entity("lyrics")
 export class Lyric  {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({nullable: false, unique: true})
-    content: string;
+  @Column({nullable: false, unique: true})
+  content: string;
 
-    @OneToOne(_ => Song, song => song.lyrics)
-    @JoinColumn({name: 'song_id'})
-    song: Song; 
+  @OneToOne(_ => Song, song => song.lyrics)
+  @JoinColumn({name: 'song_id'})
+  song: Song; 
 }
 
 export type LyricUpdateDto = Omit<Partial<Lyric>, 'id'>;
