@@ -21,12 +21,11 @@ constructor(
   album = async(id: number): Promise<Album> =>
     this.albumRepository.findOne({ where: { id: Equal(id) }});
 
-  albums = async(ids?: Array<string>, skip?: number, take?: number, search?: string): Promise<Array<Album>> => {
+  albums = async(skip?: number, take?: number, search?: string): Promise<Array<Album>> => {
     const searchOptions = this.searchBuilderService.build({
       order: { id: 'ASC' },
       skip: skip,
       take: take,
-      ids: ids,
       search: search ? { search_types: ['title'], search_string: search } : undefined
     }, 'id');
 

@@ -29,12 +29,11 @@ export class ArtistController {
 
   @Get()
   read(
-    @Query('ids') ids?: Array<string>,
     @Query('skip') skip?: number,
     @Query('take') take?: number,
     @Query('search') search?: string,
   ) {
-    return this.artistService.artists(ids, skip, take, search);
+    return this.artistService.artists(skip, take, search);
   }
 
   @Put(':id')

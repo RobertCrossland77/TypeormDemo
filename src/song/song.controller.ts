@@ -5,14 +5,6 @@ import { SongService } from './song.service';
 @Controller('song')
 export class SongController {
   constructor(private readonly songService: SongService) {}
-
-  @Post(':album_id')
-  async CreateSong(
-    @Param('album_id') album_id: number,
-    @Body() song: SongInsertDto
-  ): Promise<SongInsertDto & Song> {
-    return this.songService.createSong(album_id, song);
-  }
   
   @Get(':id')
   async GetById(@Param('id') id: number): Promise<Song> {
@@ -21,12 +13,11 @@ export class SongController {
 
   @Get()
   read(
-    @Query('ids') ids?: Array<string>,
     @Query('skip') skip?: number,
     @Query('take') take?: number,
     @Query('search') search?: string,
   ) {
-    return this.songService.songs(ids, skip, take, search);
+    return this.songService.songs(skip, take, search);
   }
 
   @Put(':id')

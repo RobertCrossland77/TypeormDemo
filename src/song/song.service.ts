@@ -13,22 +13,14 @@ constructor(
     private readonly searchBuilderService: SearchBuilderService<Song>,
   ) {}
 
-  createSong = async(album_id: number, song: SongInsertDto): Promise<SongInsertDto & Song> => {
-    const linkedAlbum = await this.albumRepository.findOneOrFail(album_id);
-    song.albums = [...song.albums, linkedAlbum];
-    
-    return this.songRepository.save(song);
-  }
-
   song = async(id: number): Promise<Song> =>
     this.songRepository.findOne({ where: { id: Equal(id) }});
 
-  songs = async(ids?: Array<string>, skip?: number, take?: number, search?: string): Promise<Array<Song>> => {
+  songs = async(skip?: number, take?: number, search?: string): Promise<Array<Song>> => {
     const searchOptions = this.searchBuilderService.build({
       order: { id: 'ASC' },
       skip: skip,
       take: take,
-      ids: ids,
       search: search ? { search_types: ['name'], search_string: search } : undefined
     }, 'id');
 

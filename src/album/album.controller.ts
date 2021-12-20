@@ -22,12 +22,11 @@ export class AlbumController {
 
   @Get()
   read(
-    @Query('ids') ids?: Array<string>,
     @Query('skip') skip?: number,
     @Query('take') take?: number,
     @Query('search') search?: string,
   ) {
-    return this.albumService.albums(ids, skip, take, search);
+    return this.albumService.albums(skip, take, search);
   }
 
   @Put(':id')

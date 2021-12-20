@@ -21,12 +21,11 @@ export class LyricController {
 
   @Get()
   read(
-    @Query('ids') ids?: Array<string>,
     @Query('skip') skip?: number,
     @Query('take') take?: number,
     @Query('search') search?: string,
   ) {
-    return this.songService.lyrics(ids, skip, take, search);
+    return this.songService.lyrics(skip, take, search);
   }
 
   @Put(':id')
