@@ -7,7 +7,7 @@ export class SongController {
   constructor(private readonly songService: SongService) {}
 
   @Post(':album_id')
-  async CreateArtist(
+  async CreateSong(
     @Param('album_id') album_id: number,
     @Body() song: SongInsertDto
   ): Promise<SongInsertDto & Song> {
