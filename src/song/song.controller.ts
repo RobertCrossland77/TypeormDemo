@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { Song, SongInsertDto, SongUpdateDto } from '../modules/song.entity';
+import { Body, Controller, Delete, Get, Param, Put, Query } from '@nestjs/common';
+import { Song, SongUpdateDto } from '../modules/song.entity';
 import { SongService } from './song.service';
 
 @Controller('song')

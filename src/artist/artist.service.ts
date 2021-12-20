@@ -3,8 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Artist, ArtistInsertDto, ArtistUpdateDto } from '../modules/artist.entity';
 import { Equal, Repository } from 'typeorm';
 import { SearchBuilderService } from '../search-builder-service/search-builder-service.service';
-import { Album, AlbumInsertDto } from 'src/modules/album.entity';
-
+import { Album, AlbumInsertDto } from '../modules/album.entity';
 
 @Injectable()
 export class ArtistService {
@@ -14,7 +13,8 @@ export class ArtistService {
     private readonly searchBuilderService: SearchBuilderService<Artist>,
   ) {}
 
-  createArtist = (artist: ArtistInsertDto): Promise<ArtistInsertDto & Artist> => this.artistRepository.save(artist);
+  createArtist = (artist: ArtistInsertDto): Promise<ArtistInsertDto & Artist> => 
+    this.artistRepository.save(artist);
 
   addAlbum = async(artist_id: number, album: AlbumInsertDto) => {
     const artist = await this.artistRepository.findOneOrFail(artist_id);

@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Song, SongInsertDto, SongUpdateDto } from '../modules/song.entity';
+import { Song, SongUpdateDto } from '../modules/song.entity';
 import { SearchBuilderService } from '../search-builder-service/search-builder-service.service';
 import { Equal, Repository } from 'typeorm';
-import { Album } from '../modules/album.entity';
 
 @Injectable()
 export class SongService {
 constructor(
     @InjectRepository(Song) private readonly songRepository: Repository<Song>,
-    @InjectRepository(Album) private readonly albumRepository: Repository<Album>,
     private readonly searchBuilderService: SearchBuilderService<Song>,
   ) {}
 

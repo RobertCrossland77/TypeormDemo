@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { Lyric, LyricInsertDto, LyricUpdateDto } from '../modules/lyric.entity';
+import { Body, Controller, Delete, Get, Param, Put, Query } from '@nestjs/common';
+import { Lyric, LyricUpdateDto } from '../modules/lyric.entity';
 import { LyricService } from './lyric.service';
 
 @Controller('lyric')

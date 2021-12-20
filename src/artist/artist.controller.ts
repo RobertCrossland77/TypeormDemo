@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { AlbumInsertDto } from 'src/modules/album.entity';
+import { AlbumInsertDto } from '../modules/album.entity';
 import { Artist, ArtistInsertDto, ArtistUpdateDto } from '../modules/artist.entity';
 import { ArtistService } from './artist.service';
 
