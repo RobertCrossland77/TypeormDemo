@@ -27,8 +27,12 @@ constructor(
     return await this.songRepository.find(searchOptions);
   }
 
-  updateSong = async(id: number, song: SongUpdateDto) => 
-    this.songRepository.update(id, song);
-
+  updateSong = async(id: number, song: SongUpdateDto) => {
+    const currentSong = await this.songRepository.findOneOrFail(id);
+    const songToUpdate = { ...currentSong, ...song };
+  
+    return this.songRepository.save(songToUpdate);
+  }
+    
   deleteSong = async(id: number) => this.songRepository.delete(id);
 }

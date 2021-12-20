@@ -15,4 +15,4 @@ export class Lyric  {
 }
 
 export type LyricUpdateDto = Omit<Partial<Lyric>, 'id'>;
-export type LyricInsertDto = Pick<Lyric, 'content' | 'song'>;
+export type LyricInsertDto = Pick<Lyric, 'content'>;

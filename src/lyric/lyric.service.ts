@@ -13,13 +13,6 @@ constructor(
     private readonly searchBuilderService: SearchBuilderService<Lyric>,
   ) {}
 
-  createLyric = async(song_id: number, lyric: LyricInsertDto): Promise<LyricInsertDto & Lyric> => {
-    const linkedSong = await this.songRepository.findOneOrFail(song_id);
-    lyric.song = linkedSong;
-    
-    return this.lyricRepository.save(lyric);
-  }
-
   lyric = async(id: number): Promise<Lyric> =>
     this.lyricRepository.findOne({ where: { id: Equal(id) }});
 

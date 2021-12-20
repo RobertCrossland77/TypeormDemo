@@ -21,7 +21,7 @@ export class SongController {
   }
 
   @Put(':id')
-  async Update(@Param('id') id: number, @Body() song: SongUpdateDto) {
+  async Update(@Param('id') id: number, @Body() song: SongUpdateDto): Promise<Song> {
     return this.songService.updateSong(id, song);
   }
 

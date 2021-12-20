@@ -6,14 +6,6 @@ import { LyricService } from './lyric.service';
 export class LyricController {
   constructor(private readonly songService: LyricService) {}
 
-  @Post(':song_id')
-  async CreateLyric(
-    @Param('song_id') song_id: number,
-    @Body() lyric: LyricInsertDto
-  ): Promise<LyricInsertDto & Lyric> {
-    return this.songService.createLyric(song_id, lyric);
-  }
-
   @Get(':id')
   async GetById(@Param('id') id: number): Promise<Lyric> {
     return this.songService.lyric(id);
