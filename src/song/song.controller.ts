@@ -13,7 +13,7 @@ export class SongController {
   ): Promise<SongInsertDto & Song> {
     return this.songService.createSong(album_id, song);
   }
-
+  
   @Get(':id')
   async GetById(@Param('id') id: number): Promise<Song> {
     return this.songService.song(id);

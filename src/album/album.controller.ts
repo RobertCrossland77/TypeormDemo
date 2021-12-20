@@ -1,17 +1,18 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { Album, AlbumInsertDto, AlbumUpdateDto } from '../modules/album.entity';
+import { SongInsertDto } from 'src/modules/song.entity';
+import { Album, AlbumUpdateDto } from '../modules/album.entity';
 import { AlbumService } from './album.service';
 
 @Controller('album')
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) {}
 
-  @Post(':artist_id')
-  async CreateArtist(
-    @Param('artist_id') artist_id: number,
-    @Body() album: AlbumInsertDto
-  ): Promise<AlbumInsertDto & Album> {
-    return this.albumService.createAlbum(artist_id, album);
+  @Post(':album_id/song')
+  async AddSong(
+    @Param('album_id') album_id: number,
+    @Body() song: SongInsertDto
+  ) {
+    return this.albumService.addSong(album_id, song);
   }
 
   @Get(':id')

@@ -1,22 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Album, AlbumInsertDto, AlbumUpdateDto } from '../modules/album.entity';
+import { Album, AlbumUpdateDto } from '../modules/album.entity';
 import { SearchBuilderService } from '../search-builder-service/search-builder-service.service';
 import { Equal, Repository } from 'typeorm';
-import { Artist } from '../modules/artist.entity';
+import { Song, SongInsertDto } from '../modules/song.entity';
 
 @Injectable()
 export class AlbumService {
 constructor(
     @InjectRepository(Album) private readonly albumRepository: Repository<Album>,
-    @InjectRepository(Artist) private readonly artistRepository: Repository<Artist>,
     private readonly searchBuilderService: SearchBuilderService<Album>,
   ) {}
 
-  createAlbum = async(artist_id: number, album: AlbumInsertDto): Promise<AlbumInsertDto & Album> => {
-    const linkedArtist = await this.artistRepository.findOneOrFail(artist_id);
-    album.artists = [...album.artists, linkedArtist];
-    
+  addSong = async(album_id: number, song: SongInsertDto) => {
+    const album = await this.albumRepository.findOneOrFail(album_id);
+    album.songs = [...album.songs, song as Song];
     return this.albumRepository.save(album);
   }
 

@@ -19,4 +19,4 @@ export class Song  {
 }
 
 export type SongUpdateDto = Omit<Partial<Song>, 'id'>;
-export type SongInsertDto = Pick<Song, 'name' | 'albums'>;
+export type SongInsertDto = Pick<Song, 'name' | 'lyrics'>;
